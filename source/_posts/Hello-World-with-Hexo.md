@@ -1,8 +1,8 @@
 ---
 title: Hello World! with Hexo
 date: 2018-09-07 17:57:02
-categories: misc
-tags: front-end
+categories: blog
+tags: hexo
 ---
 
 Static Site Generatorのチョイスがjekyll以外にもたくさんあるご時世ですが、諸事情によりHexoで書いてみました。
