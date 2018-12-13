@@ -1,10 +1,13 @@
 ---
 title: FULL INSTALLATION of T-Pot
-categories: honeypot
 tags:
-- honeypot
-- T-Pot
+  - honeypot
+  - security
+  - T-Pot
+categories: honeypot
+date: 2018-11-09 17:05:35
 ---
+
 
 誰もが心に持つ「人の金でT-Pot FULL INSTALLしたい」という欲求を叶えてきました。
 
