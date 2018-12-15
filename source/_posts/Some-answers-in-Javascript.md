@@ -12,7 +12,7 @@ function textToTweets(txt) {
   var tweets = [];
   for (i=0; i<num; i++) {
     var tweet = txt.substr(i*140, 140);
-    tweets.append(tweet);
+    tweets.push(tweet);
   }
   return tweets;
 }
@@ -40,7 +40,7 @@ function splitText(txt, n) {
   var arr = [];
   for (i=0; i<num; i++) {
     var sub = txt.substr(i*n, n);
-    arr.append(sub);
+    arr.push(sub);
   }
   return arr;
 }
@@ -48,30 +48,50 @@ function splitText(txt, n) {
 
 ## 3. シーザー暗号
 ```javascript
+var CHAR_A = 65;
+var CHAR_Z = 90;
+
 function rot13(txt){
+  txt = txt.toUpperCase();
   var arr = splitText(txt, 1);
   for (i=0; i<arr.length; i++) {
     var ascii = arr[i].charCodeAt(0);
-    arr[i] = String.fromCharCode(ascii + 13);
+    if (ascii < CHAR_A || ascii > CHAR_Z) {
+      arr[i] = String.fromCharCode(ascii);
+    } else if (ascii + 13 <= CHAR_Z) {
+      arr[i] = String.fromCharCode(ascii + 13);
+    } else {
+      arr[i] = String.fromCharCode(ascii - 13);
+    }
   }
-  return arr.join();
+  return arr.join('');
 }
 ```
 
 ## 4. 色々なROT
 ```javascript
 function rot(txt, n){
+  txt = txt.toUpperCase();
   var arr = splitText(txt, 1);
   for (i=0; i<arr.length; i++) {
     var ascii = arr[i].charCodeAt(0);
-    arr[i] = String.fromCharCode(ascii + n);
+    if (ascii < CHAR_A || ascii > CHAR_Z) {
+      arr[i] = String.fromCharCode(ascii);
+    } else if (ascii + n <= CHAR_Z) {
+      arr[i] = String.fromCharCode(ascii + n);
+    } else {
+      arr[i] = String.fromCharCode(ascii - 26 + n);
+    }
   }
-  return arr.join();
+  return arr.join('');
 }
 ```
 
 > ROT
+(ROT23)
 
 > deciphering
+(ROT21)
 
 > hacker-style
+(ROT16)

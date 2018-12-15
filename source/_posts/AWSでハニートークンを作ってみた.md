@@ -13,6 +13,7 @@ date: 2018-12-14 07:08:14
 
 ## ハニー<ここに任意の名詞>
 ハニーポットはだいたいの場合アプリケーション単位で、あたかも脆弱なものを騙って(エミュレートして)いる。
+世の中にはアプリケーションの他にも、攻撃者が付け狙う脆弱なものは無数にあるので、その攻撃者を騙すためのハニーエンティティもまた無数に考えられる。
 実際に運用されているかどうかは分からないが、アイディアとしては相当色々ありそう。
 
 | 名称           | 騙る対象           |
@@ -39,63 +40,63 @@ date: 2018-12-14 07:08:14
 - [やってみた結果](./#やってみた結果)
 
 ### 下準備
-何はともあれAWSアカウントのセキュリティはきちんとしておこう。
+何はともあれAWSアカウント自体のセキュリティはきちんとしておこう。
 まずはIAMのセキュリティステータスの指示に従って、オールグリーンにしておくと気持ちがいい。
 IAM、CloudTrail、CloudWatchなどは上の「サービス」タブから見つけられる。
-![IAM](/images/AWSでハニートークンを作ってみた/1.png)
+![IAM](/images/AWS-Honeytoken-Tutorial/1.png)
 
 まだrootアカウントでログイン中でしたら、セキュリティの設定のついで、料金アラームの設定もしておくと便利(デフォルトだとrootからしか設定できないので)。
 準備が出来たらrootアカウントからはログアウトして、Administratorアカウントからログインしましょう。
 
 ### トークンの生成
 次に、ユーザーを作成していく。
-![ユーザー作成](/images/AWSでハニートークンを作ってみた/2.png)
+![ユーザー作成](/images/AWS-Honeytoken-Tutorial/2.png)
 
 トークンを生成するために「プログラムによるアクセス」にチェックを入れる。
 この次のステップで重要になってくるのが、このユーザーには権限を全くもって一つも与えないことだ。
-![権限](/images/AWSでハニートークンを作ってみた/3.png)
+![権限](/images/AWS-Honeytoken-Tutorial/3.png)
 
 完了したらアクセスキーとシークレットキーが表示される。
 これをハニートークンとして攻撃者に使ってもらう。
-![トークン](/images/AWSでハニートークンを作ってみた/4.png)
+![トークン](/images/AWS-Honeytoken-Tutorial/4.png)
 
 ### CloudTrailの設定
 次に、アカウント上で起こるあらゆるAPIコールを記録してくれるCloudTrailをオンにする。
 何かしら問題が起きた時に追いやすいのでハニートークンを作るわけでは無くともオンにしておくと良い。
-![CloudTrail作成](/images/AWSでハニートークンを作ってみた/5.png)
+![CloudTrail作成](/images/AWS-Honeytoken-Tutorial/5.png)
 
 CloudTrailはS3バケットに保存してもらう。
-![名前](/images/AWSでハニートークンを作ってみた/6.png)
-![バケット](/images/AWSでハニートークンを作ってみた/7.png)
+![名前](/images/AWS-Honeytoken-Tutorial/6.png)
+![バケット](/images/AWS-Honeytoken-Tutorial/7.png)
 
 CloudTrailの反映には若干ラグがあるので、作ってすぐだとイベント履歴には何も出てこない。
 次に、作ったCloudTrail証跡をクリックして、CloudWatch Logsに流し込むロググループの設定をする。
-![反映](/images/AWSでハニートークンを作ってみた/8.png)
-![CloudTrail-CloudWatch](/images/AWSでハニートークンを作ってみた/9.png)
+![反映](/images/AWS-Honeytoken-Tutorial/8.png)
+![CloudTrail-CloudWatch](/images/AWS-Honeytoken-Tutorial/9.png)
 
 以下のようになっていれば準備OKだ。
-![準備OK](/images/AWSでハニートークンを作ってみた/10.png)
+![準備OK](/images/AWS-Honeytoken-Tutorial/10.png)
 
 ### CloudWatch Alarmの作成
 最後に、インスタンスのCPU使用率が低くなったりとか、指定した使用料を超えたりなどモニタリングに使えるCloudWatchのアラームを作成する。
 先程設定したロググループを選択する。
-![ロググループ選択](/images/AWSでハニートークンを作ってみた/11.png)
+![ロググループ選択](/images/AWS-Honeytoken-Tutorial/11.png)
 
 ハニートークンが使用されたときのみに反応して欲しいので、最初に作ったユーザーの名前でフィルタする。
 `{ $.userIdentity.userName = "honeyuser" }`
-![フィルタ](/images/AWSでハニートークンを作ってみた/12.png)
+![フィルタ](/images/AWS-Honeytoken-Tutorial/12.png)
 
 モニタリングされるメトリクスの名前を決める。
-![メトリクス](/images/AWSでハニートークンを作ってみた/13.png)
+![メトリクス](/images/AWS-Honeytoken-Tutorial/13.png)
 
 無事作成出来たら、ついにアラームを作成出来る。
-![アラーム](/images/AWSでハニートークンを作ってみた/14.png)
+![アラーム](/images/AWS-Honeytoken-Tutorial/14.png)
 
 1回でもAPIコールされたらアラームをあげて欲しいので、閾値を `> 0`に設定した。
-![閾値](/images/AWSでハニートークンを作ってみた/15.png)
+![閾値](/images/AWS-Honeytoken-Tutorial/15.png)
 
 Amazon SNSを用いて様々なサービスに流すことが出来るが、今回は最も簡単なメールでの通知にする。
-![アクション](/images/AWSでハニートークンを作ってみた/16.png)
+![アクション](/images/AWS-Honeytoken-Tutorial/16.png)
 
 「アラームの作成」を押せば、ハニートークンを使った時にアラームが鳴るように設定出来たはずだ。
 
@@ -105,17 +106,17 @@ Amazon SNSを用いて様々なサービスに流すことが出来るが、今�
 $ aws configure
 $ aws get-account-summary
 ```
-![get-account-summary](/images/AWSでハニートークンを作ってみた/17.png)
+![get-account-summary](/images/AWS-Honeytoken-Tutorial/17.png)
 
 権限が無いので、当然ながら弾かれる。
 また、CloudWatchのダッシュボードから警告が上がっていることが確認できた。
 すぐにメールも届いた。
 動作確認は大丈夫そう。
-![alert](/images/AWSでハニートークンを作ってみた/18.png)
-![email](/images/AWSでハニートークンを作ってみた/19.png)
+![alert](/images/AWS-Honeytoken-Tutorial/18.png)
+![email](/images/AWS-Honeytoken-Tutorial/19.png)
 
 最後に、pastebinにjson形式でこのトークンを上げてみて、アラートが上がるか待ってみた。
-![pastebin](/images/AWSでハニートークンを作ってみた/20.png)
+![pastebin](/images/AWS-Honeytoken-Tutorial/20.png)
 
 結論としては残念ながら、3日間でのこのpasteのunique viewは50程度であり、CloudWatchにも使われた痕跡は無かった。
 
