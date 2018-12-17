@@ -78,6 +78,7 @@ theme: replica
 
 # widget
 ga: UA-105154164-2
+disqus: blog-leojojo-me
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
