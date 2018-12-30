@@ -13,7 +13,9 @@ date: 2018-11-09 17:05:35
 
 ## T-Pot
 これは多数のハニーポットをDockerコンテナで建てて、Logstash + ElasticSearch + Kibana でログをまとめて解析出来るまでを超簡単に用意してくれるものです。
-建て方はこちらを参考にしてみてください: [EC2上にHoneypot(T-Pot)をインストールして、サイバー攻撃をELKで可視化してみた  - Qiita](https://qiita.com/tarosaiba/items/871ab0c155578f8a38fe)
+建て方はこちらを参考にしてみてください: 
+
+<a href="https://qiita.com/tarosaiba/items/871ab0c155578f8a38fe" class="embedly-card" data-card-image="0" data-card-controls="0" data-card-align="left"></a>
 
 今回は要求するスペックが割とお高いので敬遠していたFULL INSTALLATIONをしてみました。
 普通のSTANDARD INSTALLATIONと違うのは、産業用に使われている機器のハニーポットが、一般のサービスのハニーポットと同居している点です。
@@ -71,7 +73,9 @@ Stuxnetは産業用のPLC(Programmable Logic Controller)を狙った攻撃だっ
 ConPotに1件だけですが攻撃が来ていました!
 やったー
 このハニーポットは高対応型を裏に置いて低対応型を攻撃させる、いわゆるハイブリッド型のハニーポットになっているようです。
-面白いですね: [Outsmarting the smart meter | The Honeynet Project](https://www.honeynet.org/node/1179)
+面白いですね:
+<a href="https://www.honeynet.org/node/1179" class="embedly-card" data-card-image="0" data-card-controls="0" data-card-align="left"></a>
+
 ![kamstrup](/images/FULL-INSTALLATION-of-T-Pot/2.png)
 スマートメーターのKamstrupを狙っていたようです。
 
@@ -80,7 +84,9 @@ ConPotに1件だけですが攻撃が来ていました!
 攻撃として1番多かったのはWindowsのRDP(Remote Desktop Protocol)を使ったDoS攻撃のCVE-2012-0152やCVE-2001-0540です。
 9/4の極端に高い山はこれで、中国の特定のIPからの攻撃でした。
 他に多かったのはロシアからの、443番ポートでRaspberry Piを狙ったものでした。
-MiningをするTrojanを置いていってくれました: [VirusTotal](https://www.virustotal.com/#/file/46b79608c9a603c1f0046b0952f080b6cce855320a80bb6db4155a26ab0fd5f0/detection)
+MiningをするTrojanを置いていってくれました: 
+<a href="https://www.virustotal.com/#/file/46b79608c9a603c1f0046b0952f080b6cce855320a80bb6db4155a26ab0fd5f0/detection" class="embedly-card" data-card-image="0" data-card-controls="0" data-card-align="left"></a>
+
 建てておいて難ですが443番ポートも聞いていたのですね、何も考えずにポート全開放にするのは良くない。
 
 ### Suricata

@@ -26,7 +26,14 @@ tags:
 ![ルージュラ](/images/Filling-Stockings-with-Arbitary-Code/1.jpg)
 
 ### socket()をあれこれしてみる
+いいね
+<a href="https://www.amazon.co.jp/dp/B015NZFF8I/ref=cm_sw_r_cp_ep_dp_pIuiCb3H6T9CY" class="embedly-card" data-card-image="0" data-card-controls="0" data-card-align="left"></a>
+ほげ
+[url](https://www.amazon.co.jp/dp/B015NZFF8I/ref=cm_sw_r_cp_ep_dp_pIuiCb3H6T9CY)
 
+### hoge
+取れまい
+<a href="https://blog.trendmicro.co.jp/archives/20020" class="embedly-card" data-card-image="0" data-card-controls="0" data-card-align="left"></a>
 ---
 
 - [\[Debug\] LD_PRELOAD, dlsym, GCC拡張機能によって共有ライブラリの関数の呼出し前後で任意の処理を実行する - th0x4c 備忘録](http://th0x4c.github.io/blog/2013/06/25/debug-override-a-shared-library-function-by-ld-preload-dlsym-and-gcc-attributes/)

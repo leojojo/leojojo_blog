@@ -9,7 +9,7 @@ tags:
 - python
 ---
 
-[人気SNSとステガノグラフィを利用したマルウェアとの通信手法を解説 | トレンドマイクロ セキュリティブログ](https://blog.trendmicro.co.jp/archives/20020)
+<a href="https://blog.trendmicro.co.jp/archives/20020" class="embedly-card" data-card-image="0" data-card-controls="0" data-card-align="left"></a>
 これを読んで、「うわ、ツイッターじゃん、たのしい」と条件反射的に思ってしまったのでやってみた。
 
 ## ステガノグラフィ
@@ -21,6 +21,8 @@ tags:
 良くCDを焼いては、表面にバンド名などをマーカーで書いているあのシーンは、ステガノグラフィを使ってデータを隠しているのだ。
 隠しているファイルの事をペイロード、隠れ蓑となっている(この例だとオーディオファイル)ファイルの事をキャリアと呼ぶ。
 (Mr.Robotは実在するツールや手法をふんだんに使っているリアルさと、ミステリアスなストーリー展開、そして主人公の演技が素晴らしいのでぜひ見てみてほしい。)
+
+<a href="https://www.amazon.co.jp/dp/B015NZFF8I/ref=cm_sw_r_cp_ep_dp_pIuiCb3H6T9CY" class="embedly-card" data-card-image="0" data-card-controls="0" data-card-align="left"></a>
 
 そんな面倒な手法なんて使わずに、暗号化すれば隠したいデータにはアクセス出来なくなるのに、と思われるかもしれない。
 しかし、暗号化されたデータは非常に目に付きやすいのに対して、ステガノグラフィはそもそも隠されたデータがあることにすら気が付かせない点が優秀だ。
@@ -41,7 +43,8 @@ JPGはブロックを周波数に変換、量子化による情報量削減、�
 ツイッターは画像をアップロードしても、後述する対策を施していないと低画質JPGに変換するので、情報量削減のステップでステガノグラフィが壊れてしまう。
 
 ## やってみた
-[https://github.com/leojojo/twitter_cc_steg](https://github.com/leojojo/twitter_cc_steg)
+<a href="https://github.com/leojojo/twitter_cc_steg" class="embedly-card" data-card-image="0" data-card-controls="0" data-card-align="left"></a>
+
 ### 準備
 クリスマスっぽい画像`carrier.png`と、埋め込みたいテキスト`payload.txt`を用意する。
 (一瞬でも疑問に思った方はお正月っぽい画像を用意してください。僕はクリスマスプレゼントが届くまでは諦めません…)

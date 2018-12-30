@@ -71,14 +71,33 @@ time_format: HH:mm:ss
 per_page: 10
 pagination_dir: page
 
+# Navigation
+## Profile Bar
+avatar: https://ja.gravatar.com/userimage/58582291/557bcfb812bf7e8083f2346de7d70334.jpg?size=480
+location:
+email: leojojo@sfc.wide.ad.jp
+social:
+  github: leojojo
+  twitter: meganepikumin
+## Navbar
+menu:
+ archives: false
+ tags: true
+ categories: true
+
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
 theme: replica
 
 # widget
+rss_dir: atom.xml
 ga: UA-105154164-2
 disqus: blog-leojojo-me
+embedly:
+  enable: true
+graphviz:
+  enable: true
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
